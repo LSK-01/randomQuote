@@ -2,6 +2,7 @@ from flask import Flask,jsonify
 from flask import request
 import json
 import fortune
+from config import FORTUNE_PATH
 
 app = Flask(__name__)
 hashSet = set([])
@@ -25,7 +26,7 @@ def returnQuote():
         uid = request.args['uid']
 
         while True:
-            quote = fortune.get_random_fortune('/Users/luca/Desktop/flask/fortunes')
+            quote = fortune.get_random_fortune(FORTUNE_PATH)
             uidHash = hash(str(uid)+str(quote))
             print uidHash
             if not uidHash in hashSet:
@@ -39,4 +40,4 @@ def returnQuote():
 
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80)
